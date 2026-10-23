@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, text, Numer
 from sqlalchemy import relationships
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 
+
 class Service(Base) :
     __tablename__ = "services"
 
