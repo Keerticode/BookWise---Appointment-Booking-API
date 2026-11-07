@@ -1,6 +1,6 @@
-from .databsse import Base
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, text, Numeric
-from sqlalchemy import relationships
+from app.db.database import Base
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Text, Numeric, text
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 
 
@@ -9,7 +9,7 @@ class Service(Base) :
 
     id = Column(Integer, primary_key = True, nullable = False)
     name = Column(String, nullable = False)
-    description = Column(text, nullable = False)
+    description = Column(Text, nullable = False)
     duration_minutes = Column(Integer, nullable = False)
     price = Column(Numeric(10, 2), nullable = False)
     provider_id = Column(Integer, ForeignKey("users.id", ondelete = "CASCADE"), nullable = False)
