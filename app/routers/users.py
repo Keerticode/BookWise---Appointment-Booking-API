@@ -3,7 +3,7 @@ from app.schemas.users import UserCreate, UserOut
 from app.models.users import User
 from sqlalchemy.orm import Session
 from app.db.database import engine, get_db
-from app.utils import hash
+from app.utils.password import hash
 
 
 router = APIRouter(
