@@ -4,15 +4,14 @@ from app.models.users import User
 from sqlalchemy.orm import Session
 from app.db.database import engine, get_db
 from app.utils.password import hash, verify
-from app.utils.tokens import create_access_token
+from app.utils.tokens import create_access_token, get_current_user
 
 router = APIRouter(
     prefix="/users",
     tags = ["Users"]
 )
 
-
-#User's Registration ---->
+# User's Registration ---->
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model = UserOut)
 async def register_user(user : UserCreate, db : Session = Depends(get_db)) :
@@ -37,7 +36,7 @@ async def register_user(user : UserCreate, db : Session = Depends(get_db)) :
     return new_user
 
 
-#User's Login ---->
+# User's Login ---->
 
 @router.post("/login", response_model = Token)
 async def login(user_credentials : UserLogin, db : Session = Depends(get_db)) :
@@ -66,3 +65,8 @@ async def login(user_credentials : UserLogin, db : Session = Depends(get_db)) :
         "access_token" : access_token,
         "token_type" : "bearer"
     }
+
+
+@router.get("/me")
+def get_me(current_user : User = Depends(get_current_user)) :
+    return current_user
