@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
-import jwt
+from jose import jwt, JWTError
 from app.config import settings
+from schemas import users
 
 
 def create_access_token(data : dict) :
@@ -19,3 +20,21 @@ def create_access_token(data : dict) :
     )
 
     return encoded_jwt
+
+
+def verify_access_token(token : str, credentials_exception) : 
+
+    try :
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms = [settings.jwt_algorithm])
+
+        id : str = payload.get("user_id")
+
+        if id is None :
+            raise credentials_exception
+        token_data = users.TokenData(id = id)
+
+    except JWTError :
+
+        raise credentials_exception
+
+    return token_data
