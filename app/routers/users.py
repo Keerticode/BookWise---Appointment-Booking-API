@@ -4,7 +4,7 @@ from app.models.users import User
 from sqlalchemy.orm import Session
 from app.db.database import engine, get_db
 from app.utils.password import hash, verify
-
+from app.utils.tokens import create_access_token
 
 router = APIRouter(
     prefix="/users",
