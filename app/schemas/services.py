@@ -1,5 +1,6 @@
+from decimal import Decimal
 from enum import Enum
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict, Field
 
 
 # validates data sent by a client when creating a service
@@ -11,7 +12,7 @@ class serviceCreate(BaseModel) :
 
 
 # validates data returned by API
-class ServiceOut(BaseModel):
+class serviceOut(BaseModel):
     id: int
     name: str
     description: str | None
