@@ -12,3 +12,14 @@ class AvailabilityCreate(BaseModel):
         if self.end_time <= self.start_time:
             raise ValueError("End time must be after start time")
         return self
+
+
+class AvailabilityUpdate(BaseModel):
+    start_time: datetime
+    end_time: datetime
+
+    @model_validator(mode = "after")
+    def validate_time(self):
+        if self.end_time <= self.start_time:
+            raise ValueError("End time must be after start time")
+        return self    

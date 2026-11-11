@@ -12,16 +12,14 @@ class Availabilities(Base) :
     start_time = Column(
         TIMESTAMP(timezone = True),
         nullable = False,
-        server_default = text('now()')
     )
 
     end_time = Column(
         TIMESTAMP(timezone = True),
         nullable = False,
-        server_default = text('now()')
     )
 
-    is_available = Column(Boolean, nullable = False)
+    is_available = Column(Boolean, nullable = False, server_default = text("true"))
 
     created_at = Column(
         TIMESTAMP(timezone = True),
